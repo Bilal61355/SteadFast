@@ -6,7 +6,8 @@ from datetime import datetime
 import pandas as pd
 
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-creds = ServiceAccountCredentials.from_json_keyfile_name(r"C:\steadfast_ai\steadfast-494407-90536fd8219a-json-googlesheets.json", scope)
+creds_dict = dict(st.secrets["gcp_service_account"])
+creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
 sheets_client = gspread.authorize(creds)
 sheet = sheets_client.open("Steadfast Waitlist").sheet1
 
